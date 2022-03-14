@@ -37,12 +37,15 @@ function playRound(playerSelection, computerSelection) {
         } else if (computerSelection === "rock") {
             return "You lose! Rock beats scissors.";
         }
-    }
+    } 
 }
 
+// Play 5 games, keeping track of score and announcing winners
 function game() {
     let computerScore = 0;
     let playerScore = 0
+    
+    // Round for loop
     for (i = 0; i < 5; i++) {
     let playerSelection = prompt("Rock, paper, or scissors?");
     let computerSelection = computerPlay();
@@ -55,5 +58,14 @@ function game() {
     }
     console.log(`Your score: ${playerScore} `);
     console.log(`Computer's score: ${computerScore}`);
+    }
+    
+    // Game results output
+    if (playerScore > computerScore) {
+        return "Nice! You are the true master of Rock, Paper, Scissors!";
+    } else if (playerScore < computerScore) {
+        return "Oh no, it looks like you were no match for me!";
+    } else { 
+        return "You tied! You are a worthy opponent."
     }
 }
