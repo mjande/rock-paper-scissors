@@ -15,8 +15,8 @@ function computerPlay() {
 }
 
 // Compare playerSelection and computerSelection, and output message for winner of round
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
+function playRound(playerSelection) {
+    let computerSelection = computerPlay();
     if (playerSelection === computerSelection) {
         return `It's a tie! You both played ${playerSelection}.`;
     } else if (playerSelection === "rock") {
@@ -40,8 +40,26 @@ function playRound(playerSelection, computerSelection) {
     } 
 }
 
+const results = document.querySelector(".results");
+const resultsMessage = document.createElement('div');
+let playerScore = 0;
+let computerScore = 0;
+
+const rock = document.querySelector("#rock");
+rock.addEventListener('click', () => {
+    let roundResults = playRound("rock");
+    addResults(roundResults);
+}
+)
+
+function addResults(string) {
+    resultsMessage.textContent = string;
+    results.appendChild(resultsMessage);
+}
+
+
 // Play 5 games, keeping track of score and announcing winners
-function game() {
+/* function game() {
     let computerScore = 0;
     let playerScore = 0
     
@@ -68,4 +86,4 @@ function game() {
     } else { 
         return "You tied! You are a worthy opponent."
     }
-}
+} */
