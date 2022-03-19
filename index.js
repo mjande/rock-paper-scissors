@@ -53,27 +53,30 @@ function playRound(playerSelection) {
 
 const rock = document.querySelector("#rock");
 rock.addEventListener('click', () => {
-    let roundResults = playRound("rock");
-    resultsMessage.textContent = roundResults;
-    updateScore(roundResults);
-}
-)
+    if (playerScore < 5 && computerScore < 5) {
+        let roundResults = playRound("rock");
+        resultsMessage.textContent = roundResults;
+        updateScore(roundResults);
+    }    
+});
 
 const paper = document.querySelector("#paper");
 paper.addEventListener('click', () => {
-    let roundResults = playRound("paper");
-    resultsMessage.textContent = roundResults;
-    updateScore(roundResults);
-}
-)
+    if (playerScore < 5 && computerScore < 5) {
+        let roundResults = playRound("paper");
+        resultsMessage.textContent = roundResults;
+        updateScore(roundResults);
+    }    
+});
 
 const scissors = document.querySelector("#scissors");
 scissors.addEventListener('click', () => {
-    let roundResults = playRound("scissors");
-    resultsMessage.textContent = roundResults;
-    updateScore(roundResults);
-}
-)
+    if (playerScore < 5 && computerScore < 5) {
+        let roundResults = playRound("scissors");
+        resultsMessage.textContent = roundResults;
+        updateScore(roundResults);
+    }   
+});
 
 function updateScore(roundResults) {
     if (roundResults.includes("You win!")) {
@@ -83,7 +86,7 @@ function updateScore(roundResults) {
     }
     score.textContent = `Player: ${playerScore} \n
     Computer: ${computerScore}`;
-    if (playerScore >= 5 || computerScore >= 5) {
+    if (playerScore === 5 || computerScore === 5) {
         gameEnd();
     }
 }
@@ -96,4 +99,21 @@ function gameEnd() {
     } else { 
         gameResults.textContent = "You tied! You are a worthy opponent."
     }
+    let resetButton = document.createElement("button");
+    resetButton.className = "resetButton"
+    results.appendChild(resetButton);
+    resetButton.textContent = "Play again?";
+    resetButton.addEventListener('click', () => {
+        resetGame();
+    })
+}
+
+function resetGame() {
+    resultsMessage.textContent = "";
+    playerScore = 0;
+    computerScore = 0;
+    score.textContent = "";
+    gameResults.textContent = "";
+    let resetButton = document.querySelector(".resetButton")
+    resetButton.remove();
 }
