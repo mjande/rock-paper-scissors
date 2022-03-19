@@ -1,3 +1,11 @@
+const results = document.querySelector(".results");
+const resultsMessage = document.querySelector("#resultsMessage");
+let score = document.querySelector("#score");
+let gameResults = document.querySelector("#gameResults");
+let playerScore = 0;
+let computerScore = 0;
+
+
 // Store random computer result to variable computerResult
 function computerPlay() {
     // Generate a random number between 1 and 3
@@ -13,6 +21,7 @@ function computerPlay() {
     }
     return computerResult;
 }
+
 
 // Compare playerSelection and computerSelection, and output message for winner of round
 function playRound(playerSelection) {
@@ -40,50 +49,51 @@ function playRound(playerSelection) {
     } 
 }
 
-const results = document.querySelector(".results");
-const resultsMessage = document.createElement('div');
-let playerScore = 0;
-let computerScore = 0;
+
 
 const rock = document.querySelector("#rock");
 rock.addEventListener('click', () => {
     let roundResults = playRound("rock");
-    addResults(roundResults);
+    resultsMessage.textContent = roundResults;
+    updateScore(roundResults);
 }
 )
 
-function addResults(string) {
-    resultsMessage.textContent = string;
-    results.appendChild(resultsMessage);
+const paper = document.querySelector("#paper");
+paper.addEventListener('click', () => {
+    let roundResults = playRound("paper");
+    resultsMessage.textContent = roundResults;
+    updateScore(roundResults);
 }
+)
 
+const scissors = document.querySelector("#scissors");
+scissors.addEventListener('click', () => {
+    let roundResults = playRound("scissors");
+    resultsMessage.textContent = roundResults;
+    updateScore(roundResults);
+}
+)
 
-// Play 5 games, keeping track of score and announcing winners
-/* function game() {
-    let computerScore = 0;
-    let playerScore = 0
-    
-    // Round for loop
-    for (i = 0; i < 5; i++) {
-    let playerSelection = prompt("Rock, paper, or scissors?");
-    let computerSelection = computerPlay();
-    let result = playRound(playerSelection, computerSelection);
-    console.log(result);
-    if (result.includes("You win!")) {
+function updateScore(roundResults) {
+    if (roundResults.includes("You win!")) {
         playerScore = playerScore + 1;
-    } else if (result.includes("You lose!")){
+    } else if (roundResults.includes("You lose!")){
         computerScore = computerScore + 1;
     }
-    console.log(`Your score: ${playerScore} `);
-    console.log(`Computer's score: ${computerScore}`);
+    score.textContent = `Player: ${playerScore} \n
+    Computer: ${computerScore}`;
+    if (playerScore >= 5 || computerScore >= 5) {
+        gameEnd();
     }
-    
-    // Game results output
+}
+
+function gameEnd() {
     if (playerScore > computerScore) {
-        return "Nice! You are the true master of Rock, Paper, Scissors!";
+        gameResults.textContent = "Nice! You are the true master of Rock, Paper, Scissors!";
     } else if (playerScore < computerScore) {
-        return "Oh no, it looks like you were no match for me!";
+        gameResults.textContent = "Oh no, it looks like you were no match for me!";
     } else { 
-        return "You tied! You are a worthy opponent."
+        gameResults.textContent = "You tied! You are a worthy opponent."
     }
-} */
+}
